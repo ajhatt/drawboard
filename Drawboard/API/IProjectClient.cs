@@ -1,4 +1,5 @@
 ﻿using Drawboard.Model;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,5 +15,12 @@ namespace Drawboard.API
         /// </summary>
         /// <returns></returns>
         Task<List<Project>> GetUserProjectsAsync();
+
+        /// <summary>
+        /// Get a projects logo as a encoded URI.
+        /// </summary>
+        /// <param name="parentProjectID"></param>
+        /// <returns></returns>
+        Task<Uri> GetProjectLogo(string parentProjectID);
     }
 }

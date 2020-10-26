@@ -6,6 +6,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:MUXC="using:Microsoft.UI.Xaml.Controls"
+             xmlns:viewModels="using:Drawboard.ViewModels"
+             xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="400">
@@ -22,11 +24,22 @@
 
                 <toolkit:DataGrid ItemsSource="{x:Bind ViewModel.Projects, Mode=OneWay}"
                                   AutoGenerateColumns="False"
-                                  IsReadOnly="True">
+                                  IsReadOnly="True" >
                     <toolkit:DataGrid.Columns>
-                        <toolkit:DataGridTextColumn Header="Name"
-                                                    Binding="{Binding Name}"
-                                                    CanUserSort="False" />
+                        <toolkit:DataGridTemplateColumn Header="Name">
+                            <toolkit:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate x:DataType="viewModels:ProjectViewModel">
+                                    <toolkit:DockPanel VerticalAlignment="Center">
+                                        <controls:ImageEx Source="{x:Bind ImageSource, Mode=OneWay}"
+                                                          Margin="5"
+                                                          MaxWidth="128"
+                                                          MaxHeight="128" />
+                                        <TextBlock Text="{x:Bind Name, Mode=OneWay}"
+                                                   VerticalAlignment="Stretch" />
+                                    </toolkit:DockPanel>
+                                </DataTemplate>
+                            </toolkit:DataGridTemplateColumn.CellTemplate>
+                        </toolkit:DataGridTemplateColumn>
                         <toolkit:DataGridTextColumn Header="Description"
                                                     Binding="{Binding Description}"
                                                     CanUserSort="False" />
@@ -37,8 +50,8 @@
                                   VerticalAlignment="Top"
                                   IsIndeterminate="True"
                                   Visibility="{x:Bind ViewModel.Loading, Mode=OneWay}" />
-                <TextBlock Text="Whoops! Something went wrong loading the project list. Hit F5 to refresh." 
-                           Visibility="{x:Bind ViewModel.Error, Mode=OneWay}"/>
+                <TextBlock Text="Whoops! Something went wrong loading the project list. Hit F5 to refresh."
+                           Visibility="{x:Bind ViewModel.Error, Mode=OneWay}" />
             </Grid>
         </RelativePanel>
     </Grid>

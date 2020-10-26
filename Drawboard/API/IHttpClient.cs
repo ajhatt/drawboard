@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage.Streams;
 using Windows.Web.Http;
 
 namespace Drawboard.API
@@ -15,5 +16,7 @@ namespace Drawboard.API
     public interface IHttpClient
     {
         Task<HttpResponseMessage> GetAsync(System.Uri uri);
+
+        Task<IBuffer> GetBufferAsync(Uri uri);
     }
 }

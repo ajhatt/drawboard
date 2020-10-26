@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Data.Json;
+using Windows.Storage.Streams;
 using Windows.Web.AtomPub;
 using Windows.Web.Http;
 using Windows.Web.Http.Headers;
@@ -44,6 +45,20 @@ namespace Drawboard.API
             }
             return resp;
         }
+
+        public async Task<IBuffer> GetBufferAsync(Uri uri)
+        {
+            try
+            {
+                return await _client.GetBufferAsync(uri);
+            }
+            catch (Exception)
+            {
+                await refreshAccessToken();
+                return await _client.GetBufferAsync(uri);
+            }
+        }
+
 
         private async Task refreshAccessToken()
         {

@@ -1,7 +1,10 @@
 ﻿using Drawboard.Model;
+using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,6 +80,23 @@ namespace Drawboard.API
                 p.OwnerID = ownerId.GetString();
             }
             return p;
+        }
+
+        public async Task<Uri> GetProjectLogo(string parentProjectID)
+        {
+            try
+            {
+                // query for the project data
+                var buffer = await _client.GetBufferAsync(new Uri(Host, $"/api/v1/project/{parentProjectID}/logo.png"));
+
+                // read PNG
+                var base64 = Convert.ToBase64String(buffer.ToArray());
+                return new Uri($"data:image/png;base64,{base64}");
+            }
+            catch (Exception e)
+            {
+                throw new Exception("failed reading project logo", e);
+            }
         }
     }
 }

@@ -32,8 +32,8 @@ namespace Drawboard.ViewModels
         /// <summary>
         /// Observable collection of authenticated users projects.
         /// </summary>
-        public ObservableCollection<Project> Projects { get; private set; } = 
-            new ObservableCollection<Project>();
+        public ObservableCollection<ProjectViewModel> Projects { get; private set; } = 
+            new ObservableCollection<ProjectViewModel>();
 
         private bool _loading = false;
 
@@ -69,8 +69,16 @@ namespace Drawboard.ViewModels
             {
                 var projects = await _projectClient.GetUserProjectsAsync();
                 await DispatcherHelper.ExecuteOnUIThreadAsync(() => {
-                    foreach (var p in projects)
+                    foreach (var p in projects.Select(x => new ProjectViewModel(_projectClient)
+                    {
+                        ID = x.ID,
+                        Name = x.Name,
+                        Description = x.Description,
+                    }))
+                    {
                         Projects.Add(p);
+                        p.LoadImage();
+                    }
                     Loading = false;
                 });
             } 

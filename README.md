@@ -21,9 +21,11 @@ The root view is `App`.
 
 ## TODO
 
-- load project logo and display
+- Improve the project list view
 
 ## Possible improvements
 
 - Add a decorator to the `IProjectClient` instance that caches the project list (expires after some duration).
+- Persist the users 'access token' between instances.
+- Cache project logos
 
