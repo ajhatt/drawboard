@@ -82,7 +82,12 @@ namespace Drawboard.API
             return p;
         }
 
-        public async Task<Uri> GetProjectLogo(string parentProjectID)
+        /// <summary>
+        /// Get the projects logo. An empty image is returned if no logo exists.
+        /// </summary>
+        /// <param name="parentProjectID"></param>
+        /// <returns></returns>
+        public async Task<Uri> GetProjectLogoAsync(string parentProjectID)
         {
             try
             {

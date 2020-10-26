@@ -9,36 +9,57 @@ using System.Threading.Tasks;
 
 namespace Drawboard.ViewModels
 {
+    /// <summary>
+    /// Project view model.
+    /// </summary>
     public class ProjectViewModel : ViewModelBase
     {
-
+        private readonly Project _project;
         private readonly IProjectClient _client;
         private Uri _imageSource;
 
+        /// <summary>
+        /// Project image source.
+        /// </summary>
         public Uri ImageSource
         {
             get => _imageSource;
             set => Set(ref _imageSource, value);
         }
 
-        public string Name { get; set; }
+        /// <summary>
+        /// Project name.
+        /// </summary>
+        public string Name => _project.Name;
 
-        public string Description { get; set; }
+        /// <summary>
+        /// Project description.
+        /// </summary>
+        public string Description => _project.Description;
 
-        public string ID { get; set; }
+        /// <summary>
+        /// Project ID.
+        /// </summary>
+        public string ID => _project.ID;
 
-        public ProjectViewModel(IProjectClient client)
+        public ProjectViewModel(Project project, IProjectClient client)
         {
+            if (null == project)
+                throw new ArgumentNullException("project");
             if (null == client)
                 throw new ArgumentNullException("client");
+            _project = project;
             _client = client;
         }
 
-        public async void LoadImage()
+        /// <summary>
+        /// Begin loading the projects image.
+        /// </summary>
+        public async void LoadImageAsync()
         {
             try
             {
-                 ImageSource = await _client.GetProjectLogo(ID);
+                 ImageSource = await _client.GetProjectLogoAsync(ID);
             }
             catch (Exception e)
             {

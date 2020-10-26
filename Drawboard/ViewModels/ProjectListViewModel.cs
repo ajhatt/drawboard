@@ -32,7 +32,7 @@ namespace Drawboard.ViewModels
         /// <summary>
         /// Observable collection of authenticated users projects.
         /// </summary>
-        public ObservableCollection<ProjectViewModel> Projects { get; private set; } = 
+        public ObservableCollection<ProjectViewModel> Projects { get; private set; } =
             new ObservableCollection<ProjectViewModel>();
 
         private bool _loading = false;
@@ -40,7 +40,8 @@ namespace Drawboard.ViewModels
         /// <summary>
         /// Indicates of the project list is currently loading.
         /// </summary>
-        public bool Loading {
+        public bool Loading
+        {
             get => _loading;
             set => Set(ref _loading, value);
         }
@@ -50,7 +51,8 @@ namespace Drawboard.ViewModels
         /// <summary>
         /// Indicates if there was a problem loading the users data.
         /// </summary>
-        public bool Error {
+        public bool Error
+        {
             get => _error;
             set => Set(ref _error, value);
         }
@@ -60,7 +62,8 @@ namespace Drawboard.ViewModels
         /// </summary>
         public async void LoadProjects()
         {
-            await DispatcherHelper.ExecuteOnUIThreadAsync(() => {
+            await DispatcherHelper.ExecuteOnUIThreadAsync(() =>
+            {
                 Loading = true;
                 Projects.Clear();
             });
@@ -68,20 +71,16 @@ namespace Drawboard.ViewModels
             try
             {
                 var projects = await _projectClient.GetUserProjectsAsync();
-                await DispatcherHelper.ExecuteOnUIThreadAsync(() => {
-                    foreach (var p in projects.Select(x => new ProjectViewModel(_projectClient)
-                    {
-                        ID = x.ID,
-                        Name = x.Name,
-                        Description = x.Description,
-                    }))
+                await DispatcherHelper.ExecuteOnUIThreadAsync(() =>
+                {
+                    foreach (var p in projects.Select(x => new ProjectViewModel(x, _projectClient)))
                     {
                         Projects.Add(p);
-                        p.LoadImage();
+                        p.LoadImageAsync();
                     }
                     Loading = false;
                 });
-            } 
+            }
             catch (Exception e)
             {
                 Console.Error.WriteLine(e.Message);

@@ -21,6 +21,6 @@ namespace Drawboard.API
         /// </summary>
         /// <param name="parentProjectID"></param>
         /// <returns></returns>
-        Task<Uri> GetProjectLogo(string parentProjectID);
+        Task<Uri> GetProjectLogoAsync(string parentProjectID);
     }
 }
