@@ -10,7 +10,7 @@
              d:DesignHeight="300"
              d:DesignWidth="400">
 
-    <Grid>
+    <Grid KeyDown="Grid_KeyDown">
         <RelativePanel Margin="10">
             <TextBlock x:Name="PageTitle"
                        Text="Drawboard Projects"
@@ -21,7 +21,8 @@
                   RelativePanel.Below="PageTitle">
 
                 <toolkit:DataGrid ItemsSource="{x:Bind ViewModel.Projects, Mode=OneWay}"
-                                  AutoGenerateColumns="False">
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True">
                     <toolkit:DataGrid.Columns>
                         <toolkit:DataGridTextColumn Header="Name"
                                                     Binding="{Binding Name}"
@@ -36,6 +37,8 @@
                                   VerticalAlignment="Top"
                                   IsIndeterminate="True"
                                   Visibility="{x:Bind ViewModel.Loading, Mode=OneWay}" />
+                <TextBlock Text="Whoops! Something went wrong loading the project list. Hit F5 to refresh." 
+                           Visibility="{x:Bind ViewModel.Error, Mode=OneWay}"/>
             </Grid>
         </RelativePanel>
     </Grid>

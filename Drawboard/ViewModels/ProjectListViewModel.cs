@@ -32,6 +32,13 @@ namespace Drawboard.ViewModels
             set => Set(ref _loading, value);
         }
 
+        private bool _error = false;
+
+        public bool Error {
+            get => _error;
+            set => Set(ref _error, value);
+        }
+
         public async void LoadProjects()
         {
             await DispatcherHelper.ExecuteOnUIThreadAsync(() => {
@@ -39,13 +46,24 @@ namespace Drawboard.ViewModels
                 Projects.Clear();
             });
 
-            var projects = await _projectClient.GetUserProjectsAsync();
-
-            await DispatcherHelper.ExecuteOnUIThreadAsync(() => {
-                foreach (var p in projects)
-                    Projects.Add(p);
-                Loading = false;
-            });
+            try
+            {
+                var projects = await Task.Run(_projectClient.GetUserProjectsAsync);
+                await DispatcherHelper.ExecuteOnUIThreadAsync(() => {
+                    foreach (var p in projects)
+                        Projects.Add(p);
+                    Loading = false;
+                });
+            } 
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+                await DispatcherHelper.ExecuteOnUIThreadAsync(() =>
+                {
+                    Error = true;
+                    Loading = false;
+                });
+            }
         }
     }
 }

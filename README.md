@@ -10,7 +10,7 @@ Author: Alister Hatt (alister.hatt@gmail.com)
 
 ## Architecture
 
-The application simple UWP application.
+The application is a simple UWP application.
 
 The root view is `App`. 
 

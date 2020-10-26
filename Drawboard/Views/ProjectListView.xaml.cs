@@ -33,5 +33,11 @@ namespace Drawboard.Views
             InitializeComponent();
             ViewModel.LoadProjects();
         }
+
+        private void Grid_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.F5)
+                ViewModel.LoadProjects();
+        }
     }
 }
