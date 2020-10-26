@@ -9,6 +9,10 @@ namespace Drawboard.API
     /// </summary>
     public interface IProjectClient
     {
+        /// <summary>
+        /// Query the authenticated users project list.
+        /// </summary>
+        /// <returns></returns>
         Task<List<Project>> GetUserProjectsAsync();
     }
 }

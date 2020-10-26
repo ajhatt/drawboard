@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 namespace Drawboard.Model
 {
     /// <summary>
-    /// Projects.
-    /// 
     /// Represents a Drawboad project.
     /// </summary>
     public class Project

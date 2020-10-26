@@ -11,7 +11,7 @@ using Windows.Web.Http;
 namespace Drawboard.API
 {
     /// <summary>
-    /// Methods for using the 'project' endpoints of the Drawboard API.
+    /// Project client implementation using Drawboard REST endpoints.
     /// </summary>
     public class ProjectClient : IProjectClient
     {

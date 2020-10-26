@@ -11,10 +11,17 @@ using Windows.UI.Xaml.Controls;
 
 namespace Drawboard.ViewModels
 {
+    /// <summary>
+    /// Project list view model.
+    /// </summary>
     public class ProjectListViewModel : ViewModelBase
     {
         private readonly IProjectClient _projectClient;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="projectClient">Drawboard project API client.</param>
         public ProjectListViewModel(IProjectClient projectClient)
         {
             if (null == projectClient)
@@ -22,11 +29,17 @@ namespace Drawboard.ViewModels
             _projectClient = projectClient;
         }
 
+        /// <summary>
+        /// Observable collection of authenticated users projects.
+        /// </summary>
         public ObservableCollection<Project> Projects { get; private set; } = 
             new ObservableCollection<Project>();
 
         private bool _loading = false;
 
+        /// <summary>
+        /// Indicates of the project list is currently loading.
+        /// </summary>
         public bool Loading {
             get => _loading;
             set => Set(ref _loading, value);
@@ -34,11 +47,17 @@ namespace Drawboard.ViewModels
 
         private bool _error = false;
 
+        /// <summary>
+        /// Indicates if there was a problem loading the users data.
+        /// </summary>
         public bool Error {
             get => _error;
             set => Set(ref _error, value);
         }
 
+        /// <summary>
+        /// Load/refresh the authenticated users project list.
+        /// </summary>
         public async void LoadProjects()
         {
             await DispatcherHelper.ExecuteOnUIThreadAsync(() => {
@@ -48,7 +67,7 @@ namespace Drawboard.ViewModels
 
             try
             {
-                var projects = await Task.Run(_projectClient.GetUserProjectsAsync);
+                var projects = await _projectClient.GetUserProjectsAsync();
                 await DispatcherHelper.ExecuteOnUIThreadAsync(() => {
                     foreach (var p in projects)
                         Projects.Add(p);

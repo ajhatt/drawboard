@@ -27,6 +27,9 @@ namespace Drawboard
     sealed partial class App : Application
     {
 
+        /// <summary>
+        /// Global instance of Drawboard Project API client.
+        /// </summary>
         public static IProjectClient ProjectClient { get; } = new ProjectClient(new API.AuthenticatedClient());
 
         /// <summary>
