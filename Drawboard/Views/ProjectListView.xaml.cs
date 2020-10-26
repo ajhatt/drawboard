@@ -25,8 +25,8 @@ namespace Drawboard.Views
         /// <summary>
         /// View model using the app wide project client instance.
         /// </summary>
-        public ProjectCollectionViewModel ViewModel { get; } 
-            = new ProjectCollectionViewModel(App.ProjectClient);
+        public ProjectListViewModel ViewModel { get; } 
+            = new ProjectListViewModel(App.ProjectClient);
 
         public ProjectListView()
         {
