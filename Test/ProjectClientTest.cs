@@ -26,6 +26,11 @@ namespace Test.API
             {
                 return Task.FromResult(this.GetAsyncResp);
             }
+
+            public Task<IBuffer> GetBufferAsync(Uri uri)
+            {
+                throw new NotImplementedException();
+            }
         }
 
 
