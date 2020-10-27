@@ -21,10 +21,12 @@ The root view is `App`.
 
 ## TODO
 
-- Improve the project list view
+- Unit test view models
+- Unit test client authentication
 
 ## Possible improvements
 
+- Add an authentication screen where user can enter credentials
 - Add a decorator to the `IProjectClient` instance that caches the project list (expires after some duration).
 - Persist the users 'access token' between instances.
 - Cache project logos
