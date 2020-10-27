@@ -21,7 +21,34 @@
                   RelativePanel.AlignLeftWithPanel="True"
                   RelativePanel.AlignRightWithPanel="True"
                   RelativePanel.Below="PageTitle">
-
+                <ListView ItemsSource="{x:Bind ViewModel.Projects, Mode=OneWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="viewModels:ProjectViewModel">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <controls:ImageEx Source="{x:Bind ImageSource, Mode=OneWay}"
+                                                  Margin="5"
+                                                  MaxWidth="128"
+                                                  MaxHeight="128"
+                                                  Grid.RowSpan="2" />
+                                <StackPanel Grid.Column="1" Margin="50">
+                                    <TextBlock Text="{x:Bind Name, Mode=OneWay}"
+                                               VerticalAlignment="Stretch"
+                                               Grid.Column="1"
+                                               FontWeight="Bold" />
+                                    <TextBlock Text="{x:Bind Description, Mode=OneWay}"
+                                               VerticalAlignment="Stretch"
+                                               Grid.Column="1"
+                                               Grid.Row="1" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!--
                 <toolkit:DataGrid ItemsSource="{x:Bind ViewModel.Projects, Mode=OneWay}"
                                   AutoGenerateColumns="False"
                                   IsReadOnly="True" >
@@ -45,6 +72,7 @@
                                                     CanUserSort="False" />
                     </toolkit:DataGrid.Columns>
                 </toolkit:DataGrid>
+                -->
                 <MUXC:ProgressBar Margin="0,50,0,0"
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Top"
