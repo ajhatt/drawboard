@@ -19,9 +19,12 @@ The root view is `App`.
 - `ProjectClient`: this is a static instance of the Drawboard API client, `IProjectClient`.
 - `ProjectListView`: this view loads and displays the list of projects for the authenticated user. This view is bound to the view model `ProjectListViewModel`.
 
+## Testing
+
+Unit tests are contained in the `Test` project and should work using Visual Studios Test Explorer.
+
 ## TODO
 
-- Unit test view models
 - Unit test client authentication
 
 ## Possible improvements
