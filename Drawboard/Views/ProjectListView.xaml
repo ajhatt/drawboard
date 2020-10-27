@@ -34,7 +34,8 @@
                                                   MaxWidth="128"
                                                   MaxHeight="128"
                                                   Grid.RowSpan="2" />
-                                <StackPanel Grid.Column="1" Margin="50">
+                                <StackPanel Grid.Column="1"
+                                            Margin="50">
                                     <TextBlock Text="{x:Bind Name, Mode=OneWay}"
                                                VerticalAlignment="Stretch"
                                                Grid.Column="1"
@@ -48,31 +49,6 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <!--
-                <toolkit:DataGrid ItemsSource="{x:Bind ViewModel.Projects, Mode=OneWay}"
-                                  AutoGenerateColumns="False"
-                                  IsReadOnly="True" >
-                    <toolkit:DataGrid.Columns>
-                        <toolkit:DataGridTemplateColumn Header="Name">
-                            <toolkit:DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate x:DataType="viewModels:ProjectViewModel">
-                                    <toolkit:DockPanel VerticalAlignment="Center">
-                                        <controls:ImageEx Source="{x:Bind ImageSource, Mode=OneWay}"
-                                                          Margin="5"
-                                                          MaxWidth="128"
-                                                          MaxHeight="128" />
-                                        <TextBlock Text="{x:Bind Name, Mode=OneWay}"
-                                                   VerticalAlignment="Stretch" />
-                                    </toolkit:DockPanel>
-                                </DataTemplate>
-                            </toolkit:DataGridTemplateColumn.CellTemplate>
-                        </toolkit:DataGridTemplateColumn>
-                        <toolkit:DataGridTextColumn Header="Description"
-                                                    Binding="{Binding Description}"
-                                                    CanUserSort="False" />
-                    </toolkit:DataGrid.Columns>
-                </toolkit:DataGrid>
-                -->
                 <MUXC:ProgressBar Margin="0,50,0,0"
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Top"
